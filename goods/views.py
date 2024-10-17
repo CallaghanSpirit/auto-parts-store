@@ -2,4 +2,9 @@ from django.shortcuts import render,HttpResponse
 
 # Create your views here.
 def index(request):
-    return render(request,template_name='goods/index.html')
+    data = {'title':'Главная страница'}
+    return render(request,template_name='goods/index.html',context=data)
+
+def category(request):
+    data = {'title':'Категории'}
+    return render(request,template_name='goods/category.html',context=data)
