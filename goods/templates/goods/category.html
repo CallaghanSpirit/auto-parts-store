@@ -1,5 +1,10 @@
 {% extends 'base.html' %}
+{% load goods_tags %}
+
 {% block content %}
    <h1>{{ title }}</h1>
    <a href="{% url 'home' %}">Главная страница</a>
+   <ul>
+       {% show_categories %}
+   </ul>
 {% endblock content %}
