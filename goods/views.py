@@ -3,7 +3,12 @@ from goods.models import Goods
 
 # Create your views here.
 def index(request):
-    data = {'title':'Главная страница'}
+    goods = Goods.objects.all()
+    data = {
+        'title':'Главная страница',
+        'goods':goods
+        
+        }
     return render(request,template_name='goods/index.html',context=data)
 
 def category(request):
