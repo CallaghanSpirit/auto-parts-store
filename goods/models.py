@@ -3,15 +3,33 @@ from django_extensions.db.fields import AutoSlugField
 from transliterate import slugify
 from django.urls import reverse
 
+#Create my own manager
+class Main_Manager(models.Manager):
+    def get_queryset(self):
+        return super().get_queryset().filter(status=Goods.Status.IN_STOCK)
+
+
+
 # Create your models here.
 class Goods(models.Model):
+    class Status(models.IntegerChoices):
+        OUT_OF_STOKE = 0, 'Не в наличии'
+        IN_STOCK = 1, 'В наличии'
+
     name = models.CharField(max_length=255)
     slug = AutoSlugField(populate_from = 'name')
+    photo = models.ImageField(upload_to='images/',null=True)
     desc = models.TextField(blank=True)
     cats = models.IntegerField(default=0)
+    status = models.BooleanField(Status,default=Status.OUT_OF_STOKE)
     time_create = models.DateTimeField(auto_now_add=True)
     time_update = models.DateTimeField(auto_now=True)
     
+
+    objects = models.Manager()
+    manager = Main_Manager() 
+
+
     def slugify_function(self,content):
         return slugify(content)
     

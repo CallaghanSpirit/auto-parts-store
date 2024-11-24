@@ -3,7 +3,7 @@ from goods.models import Goods
 
 # Create your views here.
 def index(request):
-    goods = Goods.objects.all()
+    goods = Goods.manager.all()
     data = {
         'title':'Главная страница',
         'goods':goods
