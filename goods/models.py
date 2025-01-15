@@ -20,7 +20,7 @@ class Goods(models.Model):
     slug = AutoSlugField(populate_from = 'name')
     photo = models.ImageField(upload_to='images/',null=True)
     desc = models.TextField(blank=True)
-    cats = models.IntegerField(default=0)
+    cats = models.ForeignKey('Category', on_delete=models.PROTECT, null=True, related_name='goods')
     status = models.BooleanField(Status,default=Status.OUT_OF_STOKE)
     time_create = models.DateTimeField(auto_now_add=True)
     time_update = models.DateTimeField(auto_now=True)
@@ -44,3 +44,14 @@ class Goods(models.Model):
 
     def get_absolute_url(self):
         return reverse('card-page', kwargs={'gd_slug': self.slug})
+
+class Category(models.Model):
+    name = models.CharField(max_length=100, db_index=True)
+    slug = AutoSlugField(populate_from = 'name')
+    
+    
+    def __str__(self):
+        return self.name
+    
+    def slugify_function(self,content):
+        return slugify(content)
