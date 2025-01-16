@@ -55,3 +55,6 @@ class Category(models.Model):
     
     def slugify_function(self,content):
         return slugify(content)
+    
+    def get_absolute_url(self):
+        return reverse('cat', kwargs={'cat_slug': self.slug})

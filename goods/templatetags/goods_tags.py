@@ -1,5 +1,6 @@
 from django import template
 import goods.views as views
+from goods.models import Category
 
 register = template.Library()
 
@@ -10,5 +11,5 @@ def get_categories():
 
 @register.inclusion_tag('goods/list_categories.html')
 def show_categories():
-    cats = views.cats
+    cats = Category.objects.all()
     return {'cats':cats}

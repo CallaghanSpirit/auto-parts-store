@@ -1,5 +1,5 @@
 from django.shortcuts import render,HttpResponse,get_object_or_404
-from goods.models import Goods
+from goods.models import Goods, Category
 
 # Create your views here.
 def index(request):
@@ -11,15 +11,15 @@ def index(request):
         }
     return render(request,template_name='goods/index.html',context=data)
 
-def category(request):
-    data = {'title':'Категории'}
+def category(request, cat_slug):
+    category = get_object_or_404(Category, slug=cat_slug)
+    goods = Goods.manager.filter(cats_id=category.pk)
+    data = {'title':'Категории',
+            'goods':goods,}
     return render(request,template_name='goods/category.html',context=data)
 
 def cardpage(request,gd_slug):
     goods = get_object_or_404(Goods,slug=gd_slug)
-    data = {"goods":goods}
+    data = {"goods":goods,}
     return render(request,template_name='goods/cardpage.html',context=data)
 
-cats = [{'id':1,'name':'Кексы'},
-        {'id':2, 'name':'Блины'},
-        {'id':3, 'name':'Торты'}]
