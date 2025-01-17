@@ -1,5 +1,7 @@
 <!DOCTYPE html>
 {% load static %}
+{% load goods_tags %}
+
 
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
@@ -57,9 +59,19 @@
               </nav>
         </header>
         <section>
-            {% block content %}
-                
-            {% endblock content %}
+          <h1>{{ title }}</h1>
+        <div class="container-fluid m-4">
+          <div class="row">
+             <div class="col-lg-1">
+                {% show_categories %}
+             </div>
+             <div class="col-lg-8 col-md-12">
+               {% block content %}
+                   
+               {% endblock content %}
+             </div>
+          </div>
+       </div>
         </section>
         <!--[if lt IE 7]>
             <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>

@@ -2,9 +2,22 @@
 {% load goods_tags %}
 
 {% block content %}
-   <h1>{{ title }}</h1>
-   <a href="{% url 'home' %}">Главная страница</a>
-   <ul>
-       {% show_categories %}
-   </ul>
+    <div class="row">
+        {% for g in goods %}
+           
+        <div class="col-lg-4 col-md-6">
+           <div class="card" style="width: 18rem;">
+              <img src="..." class="card-img-top" alt="{{g.name}}">
+               <div class="card-body">
+                  <h5 class="card-title">{{g.name}}</h5>
+                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                  <a href="{{ g.get_absolute_url }}" class="btn btn-primary">Купить</a>
+               </div>
+              </div>
+        </div>   
+        {% endfor %}
+  
+                  
+        
+     </div>
 {% endblock content %}
