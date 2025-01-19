@@ -16,7 +16,7 @@ def category(request, cat_slug):
     goods = Goods.manager.filter(cats_id=category.pk)
     data = {'title':'Категории',
             'goods':goods,}
-    return render(request,template_name='goods/category.html',context=data)
+    return render(request,template_name='goods/index.html',context=data)
 
 def cardpage(request,gd_slug):
     goods = get_object_or_404(Goods,slug=gd_slug)
