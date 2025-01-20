@@ -1,5 +1,5 @@
 from django.shortcuts import render,HttpResponse,get_object_or_404
-from goods.models import Goods, Category
+from goods.models import Goods, Category, Tags
 
 # Create your views here.
 def index(request):
@@ -22,4 +22,14 @@ def cardpage(request,gd_slug):
     goods = get_object_or_404(Goods,slug=gd_slug)
     data = {"goods":goods,}
     return render(request,template_name='goods/cardpage.html',context=data)
+
+def show_tag(request, tag_slug):
+    tag = get_object_or_404(Tags, slug=tag_slug)
+    goods = tag.gtags.filter(status=Goods.Status.IN_STOCK)
+
+    data = {
+        'title':f"Тег: {tag}",
+        'goods':goods,
+    }
+    return render(request, 'goods/index.html', context=data)
 
