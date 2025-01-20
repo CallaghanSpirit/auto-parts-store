@@ -21,6 +21,7 @@ class Goods(models.Model):
     photo = models.ImageField(upload_to='images/',null=True)
     desc = models.TextField(blank=True)
     cats = models.ForeignKey('Category', on_delete=models.PROTECT, null=True, related_name='goods')
+    tags = models.ManyToManyField('Tags', blank=True, related_name='tags')
     status = models.BooleanField(Status,default=Status.OUT_OF_STOKE)
     time_create = models.DateTimeField(auto_now_add=True)
     time_update = models.DateTimeField(auto_now=True)
@@ -58,3 +59,13 @@ class Category(models.Model):
     
     def get_absolute_url(self):
         return reverse('cat', kwargs={'cat_slug': self.slug})
+    
+class Tags(models.Model):
+    tag = models.CharField(max_length=100, db_index=True)
+    slug = AutoSlugField(populate_from = 'tag')
+
+    def __str__(self):
+        return self.tag
+    
+    def slugify_function(self,content):
+        return slugify(content)
