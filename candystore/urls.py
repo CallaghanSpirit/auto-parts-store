@@ -23,3 +23,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('',include('goods.urls'))
 ]+debug_toolbar_urls()
+
+admin.site.site_header = 'Панель администрирования'
+admin.site.index_title = "Авто товары"

@@ -38,6 +38,8 @@ class Goods(models.Model):
         return self.name
     
     class Meta:
+        verbose_name = "Авто товары"
+        verbose_name_plural = "Авто товары"
         ordering = ['-time_create']
         indexes = [
             models.Index(fields=['-time_create'])
