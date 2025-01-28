@@ -9,21 +9,20 @@ class Main_Manager(models.Manager):
         return super().get_queryset().filter(status=Goods.Status.IN_STOCK)
 
 
-
 # Create your models here.
 class Goods(models.Model):
     class Status(models.IntegerChoices):
         OUT_OF_STOKE = 0, 'Не в наличии'
         IN_STOCK = 1, 'В наличии'
 
-    name = models.CharField(max_length=255)
+    name = models.CharField(max_length=255, verbose_name='Имя')
     slug = AutoSlugField(populate_from = 'name')
     photo = models.ImageField(upload_to='images/',null=True)
     desc = models.TextField(blank=True)
     cats = models.ForeignKey('Category', on_delete=models.PROTECT, null=True, related_name='goods')
     tags = models.ManyToManyField('Tags', blank=True, related_name='gtags')
     status = models.BooleanField(Status,default=Status.OUT_OF_STOKE)
-    time_create = models.DateTimeField(auto_now_add=True)
+    time_create = models.DateTimeField(auto_now_add=True, verbose_name='Время создания')
     time_update = models.DateTimeField(auto_now=True)
     
 
@@ -49,10 +48,13 @@ class Goods(models.Model):
         return reverse('card-page', kwargs={'gd_slug': self.slug})
 
 class Category(models.Model):
-    name = models.CharField(max_length=100, db_index=True)
+    name = models.CharField(max_length=100, db_index=True, verbose_name='Имя')
     slug = AutoSlugField(populate_from = 'name')
     
-    
+    class Meta:
+        verbose_name = "Категории"
+        verbose_name_plural = "Категории"
+
     def __str__(self):
         return self.name
     
