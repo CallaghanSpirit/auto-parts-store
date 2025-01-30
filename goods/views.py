@@ -1,5 +1,7 @@
 from django.shortcuts import render,HttpResponse,get_object_or_404
 from goods.models import Goods, Category, Tags
+from goods.forms import AddPostForm
+
 
 # Create your views here.
 def index(request):
@@ -32,4 +34,19 @@ def show_tag(request, tag_slug):
         'goods':goods,
     }
     return render(request, 'goods/index.html', context=data)
+
+def add_prod(request):
+    if request.method == 'POST':
+        form = AddPostForm(request.POST)
+        if form.is_valid():
+            print(form.cleaned_data)
+    else:
+        form = AddPostForm()
+    
+    data = {
+        'title':'Добавление товара',
+        'form':form   
+
+            }
+    return render(request, 'goods/add_prod.html', context=data)
 
