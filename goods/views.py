@@ -1,4 +1,4 @@
-from django.shortcuts import render,HttpResponse,get_object_or_404
+from django.shortcuts import render,HttpResponse,get_object_or_404, redirect
 from goods.models import Goods, Category, Tags
 from goods.forms import AddPostForm
 
@@ -39,7 +39,11 @@ def add_prod(request):
     if request.method == 'POST':
         form = AddPostForm(request.POST)
         if form.is_valid():
-            print(form.cleaned_data)
+            try:
+                Goods.objects.create(**form.cleaned_data)
+                return redirect('home')
+            except:
+                form.add_error(None, "Ошибка добавления товара")
     else:
         form = AddPostForm()
     
