@@ -1,5 +1,6 @@
 from django import forms
 from .models import Goods, Category
+from pathlib import Path
 
 from django.core.exceptions import ValidationError
 
@@ -14,6 +15,14 @@ class AddPostForm(forms.ModelForm):
         }
         labels = {'desc': 'Описание'}
 
+class UploadFileForm(forms.Form):
+    file = forms.ImageField(label='Файл')
+
+    # def clean_file(self):
+    #     file = self.cleaned_data['file']
+    #     path = Path(f'uploads/{file}')
+    #     if path.is_file():
+    #         raise ValidationError('Файл уже существует')
 
 
 
