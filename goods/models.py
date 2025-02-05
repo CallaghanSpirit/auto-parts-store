@@ -17,7 +17,7 @@ class Goods(models.Model):
 
     name = models.CharField(max_length=255, verbose_name='Имя')
     slug = AutoSlugField(populate_from = 'name')
-    photo = models.ImageField(upload_to='images/',null=True)
+    photo = models.ImageField(upload_to="images/%Y/%m/%d/",null=True,blank=True, verbose_name='Фото')
     desc = models.TextField(blank=True)
     cats = models.ForeignKey('Category', on_delete=models.PROTECT, null=True, related_name='goods')
     tags = models.ManyToManyField('Tags', blank=True, related_name='gtags')
@@ -76,3 +76,6 @@ class Tags(models.Model):
     
     def get_absolute_url(self):
         return reverse('tag', kwargs={'tag_slug': self.slug})
+    
+class UploadFiles(models.Model):
+    file = models.FileField(upload_to='upload_model')

@@ -8,7 +8,7 @@ class AddPostForm(forms.ModelForm):
     cats = forms.ModelChoiceField(queryset=Category.objects.all(),empty_label='Без категории',label='Категория')
     class Meta:
         model = Goods
-        fields = ["name", "desc", "cats","status"]
+        fields = ["name","photo","desc", "cats","status"]
         widgets = {
             'title': forms.TextInput(attrs={'class':'form-input'}),
             'desc': forms.Textarea(attrs={'cols': 50, 'rows':5}),

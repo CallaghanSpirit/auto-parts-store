@@ -1,5 +1,5 @@
 from django.shortcuts import render,HttpResponse,get_object_or_404, redirect
-from goods.models import Goods, Category, Tags
+from goods.models import Goods, Category, Tags, UploadFiles
 from goods.forms import AddPostForm, UploadFileForm
 from pathlib import Path
 from django.core.exceptions import ValidationError
@@ -39,7 +39,7 @@ def show_tag(request, tag_slug):
 
 def add_prod(request):
     if request.method == 'POST':
-        form = AddPostForm(request.POST)
+        form = AddPostForm(request.POST, request.FILES)
         if form.is_valid():
             # try:
             #     Goods.objects.create(**form.cleaned_data)
@@ -68,7 +68,8 @@ def about(request):
     if request.method == 'POST':
         form = UploadFileForm(request.POST, request.FILES)
         if form.is_valid():
-            handle_uploaded_file(form.cleaned_data['file'])
+            fp = UploadFiles(file=form.cleaned_data['file'])
+            fp.save()
         # handle_uploaded_file(request.FILES['file_upload'])
     else:
         form = UploadFileForm()
