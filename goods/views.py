@@ -4,27 +4,29 @@ from goods.forms import AddPostForm, UploadFileForm
 from pathlib import Path
 from django.core.exceptions import ValidationError
 from django.views import View
-from django.views.generic import TemplateView 
+from django.views.generic import TemplateView, ListView
 
 
 # Create your views here.
-def index(request):
-    
-    data = {
-        'title':'Главная страница',
-        'goods':goods
+# def index(request):
+#     goods = Goods.manager.all()
+#     data = {
+#         'title':'Главная страница',
+#         'goods':goods
         
-        }
-    return render(request,template_name='goods/index.html',context=data)
+#         }
+#     return render(request,template_name='goods/index.html',context=data)
 
-class GoodsHome(TemplateView):
-    goods = Goods.manager.all() 
+class GoodsHome(ListView):
+    # model = Goods
     template_name = "goods/index.html"
+    context_object_name = 'goods'
     extra_context = {
         'title':'Главная страница',
-        'goods':goods
         
         }
+    def get_queryset(self):
+        return Goods.manager.all()
     
     # Работает при непосредственном вызове Get запроса
     # def get_context_data(self, **kwargs):
@@ -38,6 +40,14 @@ def category(request, cat_slug):
     data = {'title':'Категории',
             'goods':goods,}
     return render(request,template_name='goods/index.html',context=data)
+
+class GoodsCategory(ListView):
+    model = Category
+    template_name = "goods/index.html"
+    context_object_name = "goods"
+    
+    def get_queryset(self):
+        return Goods.manager.filter(cats__slug=self.kwargs['cat_slug'])
 
 def cardpage(request,gd_slug):
     goods = get_object_or_404(Goods,slug=gd_slug)
@@ -54,21 +64,21 @@ def show_tag(request, tag_slug):
     }
     return render(request, 'goods/index.html', context=data)
 
-def add_prod(request):
-    if request.method == 'POST':
-        form = AddPostForm(request.POST, request.FILES)
-        if form.is_valid():
-            form.save()
-            return redirect('home')
-    else:
-        form = AddPostForm()
+# def add_prod(request):
+#     if request.method == 'POST':
+#         form = AddPostForm(request.POST, request.FILES)
+#         if form.is_valid():
+#             form.save()
+#             return redirect('home')
+#     else:
+#         form = AddPostForm()
     
-    data = {
-        'title':'Добавление товара',
-        'form':form   
+#     data = {
+#         'title':'Добавление товара',
+#         'form':form   
 
-            }
-    return render(request, 'goods/add_prod.html', context=data)
+#             }
+#     return render(request, 'goods/add_prod.html', context=data)
 
 class AddProd(View):
     def get(self, request):
