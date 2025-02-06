@@ -4,7 +4,8 @@ from goods.forms import AddPostForm, UploadFileForm
 from pathlib import Path
 from django.core.exceptions import ValidationError
 from django.views import View
-from django.views.generic import  ListView, DetailView
+from django.views.generic import  ListView, DetailView, FormView
+from django.urls import reverse_lazy
 
 
 # Create your views here.
@@ -97,27 +98,37 @@ class GoodsTags(ListView):
 #             }
 #     return render(request, 'goods/add_prod.html', context=data)
 
-class AddProd(View):
-    def get(self, request):
-        form = AddPostForm()
-        data = {
-        'title':'Добавление товара',
-        'form':form   
 
-            }
-        return render(request, 'goods/add_prod.html', context=data)
+class AddProd(FormView):
+    form_class = AddPostForm
+    template_name = 'goods/add_prod.html'
+    success_url = reverse_lazy('home')
 
-    def post(self, request):
-        form = AddPostForm(request.POST, request.FILES)
-        if form.is_valid():
-            form.save()
-            return redirect('home')
-        data = {
-        'title':'Добавление товара',
-        'form':form   
+    def form_valid(self, form):
+        form.save()
+        return super().form_valid(form)
 
-            }
-        return render(request, 'goods/add_prod.html', context=data)
+# class AddProd(View):
+#     def get(self, request):
+#         form = AddPostForm()
+#         data = {
+#         'title':'Добавление товара',
+#         'form':form   
+
+#             }
+#         return render(request, 'goods/add_prod.html', context=data)
+
+#     def post(self, request):
+#         form = AddPostForm(request.POST, request.FILES)
+#         if form.is_valid():
+#             form.save()
+#             return redirect('home')
+#         data = {
+#         'title':'Добавление товара',
+#         'form':form   
+
+#             }
+#         return render(request, 'goods/add_prod.html', context=data)
 
 def handle_uploaded_file(f):
     with open(f'uploads/{f.name}', 'wb+') as destination:
