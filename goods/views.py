@@ -4,7 +4,7 @@ from goods.forms import AddPostForm, UploadFileForm
 from pathlib import Path
 from django.core.exceptions import ValidationError
 from django.views import View
-from django.views.generic import TemplateView, ListView
+from django.views.generic import  ListView, DetailView
 
 
 # Create your views here.
@@ -34,17 +34,18 @@ class GoodsHome(ListView):
     #     context['title'] = 'Пидор'
    
 
-def category(request, cat_slug):
-    category = get_object_or_404(Category, slug=cat_slug)
-    goods = Goods.manager.filter(cats_id=category.pk)
-    data = {'title':'Категории',
-            'goods':goods,}
-    return render(request,template_name='goods/index.html',context=data)
+# def category(request, cat_slug):
+#     category = get_object_or_404(Category, slug=cat_slug)
+#     goods = Goods.manager.filter(cats_id=category.pk)
+#     data = {'title':'Категории',
+#             'goods':goods,}
+#     return render(request,template_name='goods/index.html',context=data)
 
 class GoodsCategory(ListView):
-    model = Category
+    # model = Category
     template_name = "goods/index.html"
     context_object_name = "goods"
+    allow_empty = True
     
     def get_queryset(self):
         return Goods.manager.filter(cats__slug=self.kwargs['cat_slug'])
@@ -54,15 +55,26 @@ def cardpage(request,gd_slug):
     data = {"goods":goods,}
     return render(request,template_name='goods/cardpage.html',context=data)
 
-def show_tag(request, tag_slug):
-    tag = get_object_or_404(Tags, slug=tag_slug)
-    goods = tag.gtags.filter(status=Goods.Status.IN_STOCK)
+class CardPage(DetailView):
+    model = Goods
+    template_name = 'goods/cardpage.html'
 
-    data = {
-        'title':f"Тег: {tag}",
-        'goods':goods,
-    }
-    return render(request, 'goods/index.html', context=data)
+# def show_tag(request, tag_slug):
+#     tag = get_object_or_404(Tags, slug=tag_slug)
+#     goods = tag.gtags.filter(status=Goods.Status.IN_STOCK)
+
+#     data = {
+#         'title':f"Тег: {tag}",
+#         'goods':goods,
+#     }
+#     return render(request, 'goods/index.html', context=data)
+
+class GoodsTags(ListView):
+    template_name = 'goods/index.html'
+    context_object_name = 'goods'
+    def get_queryset(self):
+        return Goods.manager.filter(tags__slug=self.kwargs['tag_slug'])
+
 
 # def add_prod(request):
 #     if request.method == 'POST':
