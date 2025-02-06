@@ -7,6 +7,7 @@ from django.utils.safestring import mark_safe
 class GoodsAdmin(admin.ModelAdmin):
     list_display = ('name','photo', 'time_create', 'status', 'card_photo') 
     list_display_links = ('name',)
+    readonly_fields = ('slug',)
     ordering = ['time_create', 'name']
     list_editable = ("status",)
     actions = ['set_status']

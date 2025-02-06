@@ -56,8 +56,13 @@ def cardpage(request,gd_slug):
     return render(request,template_name='goods/cardpage.html',context=data)
 
 class CardPage(DetailView):
-    model = Goods
+    # model = Goods
     template_name = 'goods/cardpage.html'
+    slug_url_kwarg = 'gd_slug'
+    context_object_name = 'goods'
+
+    def get_object(self, queryset = ...):
+        return get_object_or_404(Goods.manager, slug = self.kwargs[self.slug_url_kwarg])
 
 # def show_tag(request, tag_slug):
 #     tag = get_object_or_404(Tags, slug=tag_slug)
