@@ -4,8 +4,9 @@ from goods.forms import AddPostForm, UploadFileForm
 from pathlib import Path
 from django.core.exceptions import ValidationError
 from django.views import View
-from django.views.generic import  ListView, DetailView, FormView
+from django.views.generic import  ListView, DetailView, FormView, CreateView, DeleteView
 from django.urls import reverse_lazy
+from django.core.paginator import Paginator
 
 
 # Create your views here.
@@ -24,8 +25,8 @@ class GoodsHome(ListView):
     context_object_name = 'goods'
     extra_context = {
         'title':'Главная страница',
-        
         }
+    paginate_by = 2
     def get_queryset(self):
         return Goods.manager.all()
     
@@ -34,13 +35,6 @@ class GoodsHome(ListView):
     #     context = super().get_context_data(**kwargs)
     #     context['title'] = 'Пидор'
    
-
-# def category(request, cat_slug):
-#     category = get_object_or_404(Category, slug=cat_slug)
-#     goods = Goods.manager.filter(cats_id=category.pk)
-#     data = {'title':'Категории',
-#             'goods':goods,}
-#     return render(request,template_name='goods/index.html',context=data)
 
 class GoodsCategory(ListView):
     # model = Category
@@ -62,18 +56,8 @@ class CardPage(DetailView):
     slug_url_kwarg = 'gd_slug'
     context_object_name = 'goods'
 
-    def get_object(self, queryset = ...):
-        return get_object_or_404(Goods.manager, slug = self.kwargs[self.slug_url_kwarg])
-
-# def show_tag(request, tag_slug):
-#     tag = get_object_or_404(Tags, slug=tag_slug)
-#     goods = tag.gtags.filter(status=Goods.Status.IN_STOCK)
-
-#     data = {
-#         'title':f"Тег: {tag}",
-#         'goods':goods,
-#     }
-#     return render(request, 'goods/index.html', context=data)
+    def get_object(self, queryset = Goods):
+        return get_object_or_404(queryset.manager, slug = self.kwargs[self.slug_url_kwarg])
 
 class GoodsTags(ListView):
     template_name = 'goods/index.html'
@@ -82,31 +66,22 @@ class GoodsTags(ListView):
         return Goods.manager.filter(tags__slug=self.kwargs['tag_slug'])
 
 
-# def add_prod(request):
-#     if request.method == 'POST':
-#         form = AddPostForm(request.POST, request.FILES)
-#         if form.is_valid():
-#             form.save()
-#             return redirect('home')
-#     else:
-#         form = AddPostForm()
-    
-#     data = {
-#         'title':'Добавление товара',
-#         'form':form   
-
-#             }
-#     return render(request, 'goods/add_prod.html', context=data)
-
-
-class AddProd(FormView):
+class AddProd(CreateView):
     form_class = AddPostForm
+    # model = Goods
+    # fields = '__all__'
+    template_name = 'goods/add_prod.html'
+    # success_url = reverse_lazy('home')
+
+class DeletePage(DeleteView):
+    model = Goods
+    fields = '__all__'
     template_name = 'goods/add_prod.html'
     success_url = reverse_lazy('home')
 
-    def form_valid(self, form):
-        form.save()
-        return super().form_valid(form)
+    # def form_valid(self, form):
+    #     form.save()
+    #     return super().form_valid(form)
 
 # class AddProd(View):
 #     def get(self, request):
@@ -137,19 +112,18 @@ def handle_uploaded_file(f):
 
 
 def about(request):
-    if request.method == 'POST':
-        form = UploadFileForm(request.POST, request.FILES)
-        if form.is_valid():
-            fp = UploadFiles(file=form.cleaned_data['file'])
-            fp.save()
-        # handle_uploaded_file(request.FILES['file_upload'])
-    else:
-        form = UploadFileForm()
+    contact_list = Goods.manager.all()
+    paginator = Paginator(contact_list, 2)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
     data = {
         'title': 'О сайте',
-        'form': form,
+        'page_obj': page_obj,
 
 
     }
     return render(request, 'goods/about.html', context=data)
+
+def login(request):
+    return render(request,'goods/login.html', context={'title':'Авторизация'})
 

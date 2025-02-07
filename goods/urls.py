@@ -8,5 +8,7 @@ urlpatterns = [
     path('tag/<slug:tag_slug>/', views.GoodsTags.as_view(), name='tag'),
     path('add-prod/', views.AddProd.as_view(), name='add-prod'),
     path('about/', views.about, name='about'),
+    path('delete-prod/<slug:slug>', views.DeletePage.as_view(), name='delete-prod'),
+    path('login/', views.login, name='login'),
 
 ]
