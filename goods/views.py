@@ -7,6 +7,7 @@ from django.views import View
 from django.views.generic import  ListView, DetailView, FormView, CreateView, DeleteView
 from django.urls import reverse_lazy
 from django.core.paginator import Paginator
+from .utils import DataMixin
 
 
 # Create your views here.
@@ -19,14 +20,14 @@ from django.core.paginator import Paginator
 #         }
 #     return render(request,template_name='goods/index.html',context=data)
 
-class GoodsHome(ListView):
+class GoodsHome(DataMixin,ListView):
     # model = Goods
     template_name = "goods/index.html"
     context_object_name = 'goods'
     extra_context = {
         'title':'Главная страница',
         }
-    paginate_by = 2
+    
     def get_queryset(self):
         return Goods.manager.all()
     
@@ -36,7 +37,7 @@ class GoodsHome(ListView):
     #     context['title'] = 'Пидор'
    
 
-class GoodsCategory(ListView):
+class GoodsCategory(DataMixin, ListView):
     # model = Category
     template_name = "goods/index.html"
     context_object_name = "goods"
@@ -59,7 +60,7 @@ class CardPage(DetailView):
     def get_object(self, queryset = Goods):
         return get_object_or_404(queryset.manager, slug = self.kwargs[self.slug_url_kwarg])
 
-class GoodsTags(ListView):
+class GoodsTags(DataMixin, ListView):
     template_name = 'goods/index.html'
     context_object_name = 'goods'
     def get_queryset(self):
