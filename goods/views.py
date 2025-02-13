@@ -8,6 +8,8 @@ from django.views.generic import  ListView, DetailView, FormView, CreateView, De
 from django.urls import reverse_lazy
 from django.core.paginator import Paginator
 from .utils import DataMixin
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 
 # Create your views here.
@@ -67,8 +69,9 @@ class GoodsTags(DataMixin, ListView):
         return Goods.manager.filter(tags__slug=self.kwargs['tag_slug'])
 
 
-class AddProd(CreateView):
+class AddProd(LoginRequiredMixin, CreateView):
     form_class = AddPostForm
+    login_url = ''
     # model = Goods
     # fields = '__all__'
     template_name = 'goods/add_prod.html'
@@ -112,6 +115,7 @@ def handle_uploaded_file(f):
             destination.write(chunk)
 
 
+@login_required(login_url='')
 def about(request):
     contact_list = Goods.manager.all()
     paginator = Paginator(contact_list, 2)

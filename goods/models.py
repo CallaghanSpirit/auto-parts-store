@@ -2,6 +2,7 @@ from django.db import models
 from django_extensions.db.fields import AutoSlugField
 from transliterate import slugify
 from django.urls import reverse
+from django.contrib.auth import get_user_model
 
 #Create my own manager
 class Main_Manager(models.Manager):
@@ -24,6 +25,7 @@ class Goods(models.Model):
     status = models.BooleanField(Status,default=Status.OUT_OF_STOKE)
     time_create = models.DateTimeField(auto_now_add=True, verbose_name='Время создания')
     time_update = models.DateTimeField(auto_now=True)
+    author = models.ForeignKey(get_user_model(), on_delete=models.SET_NULL, related_name='goods', null=True, default=None )
     
 
     objects = models.Manager()
