@@ -77,6 +77,11 @@ class AddProd(LoginRequiredMixin, CreateView):
     template_name = 'goods/add_prod.html'
     # success_url = reverse_lazy('home')
 
+    def form_valid(self, form):
+        w = form.save(commit=False)
+        w.author = self.request.user
+        return super().form_valid(form)
+
 class DeletePage(DeleteView):
     model = Goods
     fields = '__all__'
