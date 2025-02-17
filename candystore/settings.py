@@ -148,3 +148,11 @@ LOGIN_REDIRECT_URL = 'home'
 LOGOUT_REDIRECT_URL = 'users:login'
 
 LOGIN_URL = 'users:login'
+ 
+
+AUTHENTIACATION_BACKENDS = [
+    'users.authentication.EmailBackend',
+    'django.contrib.auth.backends.ModelBackend',
+    
+
+]
