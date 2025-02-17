@@ -1,6 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth import get_user_model
+from django.contrib.auth.forms import PasswordChangeForm
 
 
 class LoginUserForm(AuthenticationForm):
@@ -40,3 +41,11 @@ class ProfileUserForm(forms.ModelForm):
                 'last_name':'Фамилия',
                 }
     
+class UserPasswordChangeForm(PasswordChangeForm):
+    old_password = forms.CharField(
+        label="Старый пароль",
+        widget=forms.PasswordInput(
+            attrs={"autocomplete": "current-password", "autofocus": True}
+        ))
+    new_password1 = forms.CharField(label='Новый пароль:',widget=forms.PasswordInput())
+    new_password2 = forms.CharField(label='Подтверждение пароля:',widget=forms.PasswordInput())
