@@ -3,7 +3,7 @@ from django.urls import reverse, reverse_lazy
 from django.http import HttpResponse, HttpResponseRedirect
 from .forms import LoginUserForm, RegisterUserForm, ProfileUserForm, UserPasswordChangeForm
 from django.contrib.auth import authenticate, login, logout, get_user_model
-from django.contrib.auth.views import LoginView, PasswordChangeView,PasswordChangeDoneView
+from django.contrib.auth.views import LoginView, PasswordChangeView,PasswordChangeDoneView, PasswordResetView, PasswordResetConfirmView
 
 from django.views.generic import CreateView, UpdateView
 
@@ -43,3 +43,12 @@ class UserPasswordChange(PasswordChangeView):
 
 class UserPasswordChangeDone(PasswordChangeDoneView):
     template_name = "users/password_change_done.html"
+
+class UserResetView(PasswordResetView):
+    template_name='users/password_reset_form.html',
+    email_template_name = "users/password_reset_email.html",
+    success_url = reverse_lazy("users:password_reset_done")
+
+class UserPasswordResetConfirm(PasswordResetConfirmView):
+    template_name='users/password_reset_confirm.html'
+    success_url = reverse_lazy("users:password_reset_complete")
