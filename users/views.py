@@ -45,7 +45,7 @@ class UserPasswordChangeDone(PasswordChangeDoneView):
     template_name = "users/password_change_done.html"
 
 class UserResetView(PasswordResetView):
-    template_name='users/password_reset_form.html',
+    template_name='users/password_reset_form.html'
     email_template_name = "users/password_reset_email.html",
     success_url = reverse_lazy("users:password_reset_done")
 
