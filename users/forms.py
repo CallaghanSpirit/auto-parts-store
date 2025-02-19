@@ -33,7 +33,8 @@ class RegisterUserForm(UserCreationForm):
 class ProfileUserForm(forms.ModelForm):
     username = forms.CharField(disabled=True,label='Логин')
     email = forms.EmailField(disabled=True)
-    this_year = 
+    this_year = date.today().year
+    date_birth = forms.DateField(widget=forms.SelectDateWidget(years=tuple(range(this_year-100, this_year-5))))
 
     class Meta:
         model = get_user_model()
