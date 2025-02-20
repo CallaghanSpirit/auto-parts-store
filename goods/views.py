@@ -8,8 +8,8 @@ from django.views.generic import  ListView, DetailView, FormView, CreateView, De
 from django.urls import reverse_lazy
 from django.core.paginator import Paginator
 from .utils import DataMixin
-from django.contrib.auth.decorators import login_required
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.decorators import login_required, permission_required
+from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 
 
 # Create your views here.
@@ -48,6 +48,7 @@ class GoodsCategory(DataMixin, ListView):
     def get_queryset(self):
         return Goods.manager.filter(cats__slug=self.kwargs['cat_slug'])
 
+@permission_required(perm='goods.view_goods', raise_exception=True)
 def cardpage(request,gd_slug):
     goods = get_object_or_404(Goods,slug=gd_slug)
     data = {"goods":goods,}
@@ -69,13 +70,14 @@ class GoodsTags(DataMixin, ListView):
         return Goods.manager.filter(tags__slug=self.kwargs['tag_slug'])
 
 
-class AddProd(LoginRequiredMixin, CreateView):
+class AddProd(PermissionRequiredMixin ,LoginRequiredMixin, CreateView):
     form_class = AddPostForm
     login_url = ''
     # model = Goods
     # fields = '__all__'
     template_name = 'goods/add_prod.html'
     # success_url = reverse_lazy('home')
+    permission_required = 'goods.add_goods' # <приложение>.<действие>_<таблица>
 
     def form_valid(self, form):
         w = form.save(commit=False)
