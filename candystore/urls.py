@@ -24,7 +24,8 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',include('goods.urls')),
-    path('users/',include('users.urls', namespace='users'))
+    path('users/',include('users.urls', namespace='users')),
+    path('social-auth/', include('social_django.urls', namespace='social'))
 ]+debug_toolbar_urls()
 
 if settings.DEBUG:

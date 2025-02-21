@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'users.apps.UsersConfig',
     'django_extensions',
     "debug_toolbar",
+    'social_django',
 
 ]
 
@@ -151,6 +152,7 @@ LOGIN_URL = 'users:login'
  
 
 AUTHENTIACATION_BACKENDS = [
+    'social_core.backends.github.GithubOAuth2',
     'users.authentication.EmailBackend',
     'django.contrib.auth.backends.ModelBackend',
     
