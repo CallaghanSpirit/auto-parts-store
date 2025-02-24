@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-8=f7#u4-+&1)!f^16bjrum2-akp+@1ew8bcfv%j700qwuv)y84
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1']
+ALLOWED_HOSTS = ['127.0.0.1','localhost','driveparts.ru']
 
 INTERNAL_IPS = [
     # ...
@@ -34,6 +34,7 @@ INTERNAL_IPS = [
     # ...
 ]
 
+ROOT_URLCONF = "social_login.urls"
 # Application definition
 
 INSTALLED_APPS = [
@@ -48,6 +49,10 @@ INSTALLED_APPS = [
     'django_extensions',
     "debug_toolbar",
     'social_django',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.github',
 
 ]
 
@@ -56,12 +61,30 @@ MIDDLEWARE = [
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
+    'social_django.middleware.SocialAuthExceptionMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     "debug_toolbar.middleware.DebugToolbarMiddleware",
 
+    "allauth.account.middleware.AccountMiddleware",
+
 ]
+
+SOCIALACCOUNT_PROVIDERS = {
+    'github': {
+        # For each OAuth based provider, either add a ``SocialApp``
+        # (``socialaccount`` app) containing the required client
+        # credentials, or list them here:
+        'APP': {
+            'client_id': 'Ov23li9o52fxlBKwKK60',
+            'secret': '11ca1e163554c1dcf7725e23c42ac882efa8fcfb',
+            
+        }
+    }
+}
+
+NEXTAUTH_URL= "http://localhost:3000"
 
 ROOT_URLCONF = 'candystore.urls'
 
@@ -86,6 +109,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'candystore.wsgi.application'
 
+SOCIALACCOUNT_LOGIN_ON_GET=True
 
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
@@ -152,11 +176,11 @@ LOGIN_URL = 'users:login'
  
 
 AUTHENTIACATION_BACKENDS = [
+    'allauth.account.auth_backends.AuthenticationBackend',
     'social_core.backends.github.GithubOAuth2',
     'users.authentication.EmailBackend',
     'django.contrib.auth.backends.ModelBackend',
     
-
 ]
 
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
@@ -180,4 +204,5 @@ EMAIL_ADMIN = EMAIL_HOST_USER
 AUTH_USER_MODEL = 'users.User'
 
 SOCIAL_AUTH_GITHUB_KEY = 'Ov23li9o52fxlBKwKK60'
-SOCIAL_AUTH_GITHUB_SECRET = 'aa6d108012bcda93c8cad40611950a8b8c8015e6'
+SOCIAL_AUTH_GITHUB_SECRET = '11ca1e163554c1dcf7725e23c42ac882efa8fcfb'
+

@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% block content %}
+{% load socialaccount %}
 
 <h1>Авторизация</h1>
 
@@ -10,6 +11,11 @@
     <p><button type="submit">Войти</button></p>
 </form>
 <a href="{% url 'users:password_reset' %}">Забыли пароль?</a>
-<p><a href="{% url 'social:begin' 'github' %}"><img src="/media/social-auth/github.png" alt="github" width="50"></a></p>
+
+<p>
+    <a  href="{% provider_login_url 'github' %}">
+      <img src="/media/social-auth/github.png" alt="github" width="50">
+    </a>
+</p>
 <p> {{ test }}</p>
 {% endblock content %}
