@@ -116,8 +116,13 @@ SOCIALACCOUNT_LOGIN_ON_GET=True
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'driveparts_db',
+        'USER' : 'driveparts',
+        'PASSWORD' : '1234',
+        'HOST': 'localhost',
+        'PORT': 5432,
+
     }
 }
 
@@ -206,3 +211,15 @@ AUTH_USER_MODEL = 'users.User'
 SOCIAL_AUTH_GITHUB_KEY = 'Ov23li9o52fxlBKwKK60'
 SOCIAL_AUTH_GITHUB_SECRET = '11ca1e163554c1dcf7725e23c42ac882efa8fcfb'
 
+SOCIAL_AUTH_PIPELINE = (
+    'social_core.pipeline.social_auth.social_details',
+    'social_core.pipeline.social_auth.social_uid',
+    'social_core.pipeline.social_auth.auth_allowed',
+    'social_core.pipeline.social_auth.social_user',
+    'social_core.pipeline.user.get_username',
+    'social_core.pipeline.user.create_user',
+    'users.pipeline.new_users_handler',  # <--- set the path to the function
+    'social_core.pipeline.social_auth.associate_user',
+    'social_core.pipeline.social_auth.load_extra_data',
+    'social_core.pipeline.user.user_details',
+)
