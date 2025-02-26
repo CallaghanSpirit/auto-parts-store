@@ -27,6 +27,7 @@ urlpatterns = [
     path('users/',include('users.urls', namespace='users')),
     path('social-auth/', include('social_django.urls', namespace='social')),
     path('', include('allauth.urls')),
+    path('captcha/', include('captcha.urls')),
 ]+debug_toolbar_urls()
 
 if settings.DEBUG:

@@ -1,6 +1,6 @@
 from django.shortcuts import render,HttpResponse,get_object_or_404, redirect
 from goods.models import Goods, Category, Tags, UploadFiles
-from goods.forms import AddPostForm, UploadFileForm
+from goods.forms import AddPostForm, UploadFileForm, ContactForm
 from pathlib import Path
 from django.core.exceptions import ValidationError
 from django.views import View
@@ -136,6 +136,12 @@ def about(request):
     }
     return render(request, 'goods/about.html', context=data)
 
-def login(request):
-    return render(request,'goods/login.html', context={'title':'Авторизация'})
+class ContactFormView(LoginRequiredMixin, DataMixin, FormView):
+    form_class = ContactForm
+    template_name = 'goods/contact.html'
+    success_url = reverse_lazy('home')
+    title_page = 'Обратная связь'
 
+    def form_valid(self, form):
+        print(form.cleaned_data)
+        return super().form_valid(form)
