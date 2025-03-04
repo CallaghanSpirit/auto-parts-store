@@ -59,17 +59,19 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
-    "django.middleware.cache.UpdateCacheMiddleware",
+    "debug_toolbar.middleware.DebugToolbarMiddleware",
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    # "django.middleware.cache.UpdateCacheMiddleware",
     'django.middleware.common.CommonMiddleware',
+    # "django.middleware.cache.FetchFromCacheMiddleware",
     'django.middleware.csrf.CsrfViewMiddleware',
     'social_django.middleware.SocialAuthExceptionMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    "debug_toolbar.middleware.DebugToolbarMiddleware",
-    "django.middleware.cache.FetchFromCacheMiddleware",
+    
+    
 
     "allauth.account.middleware.AccountMiddleware",
 
@@ -136,6 +138,12 @@ CACHES = {
         "LOCATION": "redis://127.0.0.1:6379",
     }
 }
+
+# CACHE_MIDDLEWARE_ALIAS = 'default'
+
+# CACHE_MIDDLEWARE_SECONDS = 10
+
+# CACHE_MIDDLEWARE_KEY_PREFIX = 'sitewomen'
 
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators

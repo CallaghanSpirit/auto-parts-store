@@ -1,8 +1,9 @@
 from django.urls import path
 from goods import views
+from django.views.decorators.cache import cache_page
 
 urlpatterns = [
-    path("",views.GoodsHome.as_view(), name='home'),
+    path("", views.GoodsHome.as_view(), name='home'),
     path("card-page/<slug:gd_slug>/",views.CardPage.as_view(),name='card-page'),
     path("category/<slug:cat_slug>",views.GoodsCategory.as_view(), name='cat'),
     path('tag/<slug:tag_slug>/', views.GoodsTags.as_view(), name='tag'),

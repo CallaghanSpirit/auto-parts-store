@@ -10,7 +10,7 @@ from django.core.paginator import Paginator
 from .utils import DataMixin
 from django.contrib.auth.decorators import login_required, permission_required
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
-
+from django.core.cache import cache
 
 # Create your views here.
 # def index(request):
@@ -31,7 +31,11 @@ class GoodsHome(DataMixin,ListView):
         }
     
     def get_queryset(self):
-        return Goods.manager.all()
+        g_lst = cache.get("goods_posts")
+        if not g_lst:
+            g_lst = Goods.manager.all()
+            cache.set("goods_posts", g_lst , 60)
+        return g_lst
     
     # Работает при непосредственном вызове Get запроса
     # def get_context_data(self, **kwargs):
