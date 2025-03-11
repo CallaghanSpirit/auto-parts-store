@@ -759,14 +759,7 @@
     "model": "session"
   }
 },
-{
-  "model": "contenttypes.contenttype",
-  "pk": 6,
-  "fields": {
-    "app_label": "goods",
-    "model": "goods"
-  }
-},
+
 {
   "model": "contenttypes.contenttype",
   "pk": 7,

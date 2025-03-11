@@ -37,6 +37,7 @@ INTERNAL_IPS = [
 ROOT_URLCONF = "social_login.urls"
 # Application definition
 
+
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -46,6 +47,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'goods.apps.GoodsConfig',
     'users.apps.UsersConfig',
+    
     'django_extensions',
     "debug_toolbar",
     'social_django',
@@ -54,6 +56,9 @@ INSTALLED_APPS = [
     'allauth.socialaccount',
     'allauth.socialaccount.providers.github',
     'captcha',
+    'django.contrib.sitemaps',
+    # 'django.contrib.sites',
+    
     
 
 ]
@@ -132,12 +137,12 @@ DATABASES = {
     }
 }
 
-CACHES = {
-    "default": {
-        "BACKEND": "django.core.cache.backends.redis.RedisCache",
-        "LOCATION": "redis://127.0.0.1:6379",
-    }
-}
+# CACHES = {
+#     "default": {
+#         "BACKEND": "django.core.cache.backends.redis.RedisCache",
+#         "LOCATION": "redis://127.0.0.1:6379",
+#     }
+# }
 
 # CACHE_MIDDLEWARE_ALIAS = 'default'
 
@@ -241,3 +246,5 @@ SOCIAL_AUTH_PIPELINE = (
     'social_core.pipeline.social_auth.load_extra_data',
     'social_core.pipeline.user.user_details',
 )
+
+SITE_ID = 1

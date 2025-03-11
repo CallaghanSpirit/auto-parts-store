@@ -20,6 +20,12 @@ from . import settings
 from goods import urls
 from debug_toolbar.toolbar import debug_toolbar_urls
 from django.conf.urls.static import static
+from django.contrib.sitemaps.views import sitemap
+from goods.sitemaps import PostSitemap
+
+sitemaps = {
+    'posts': PostSitemap
+}
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -28,6 +34,9 @@ urlpatterns = [
     path('social-auth/', include('social_django.urls', namespace='social')),
     path('', include('allauth.urls')),
     path('captcha/', include('captcha.urls')),
+    path('sitemap.xml', sitemap, {'sitemaps': sitemaps}, name='django.contrib.sitemaps.views.sitemap'),
+
+
 ]+debug_toolbar_urls()
 
 if settings.DEBUG:
