@@ -16,11 +16,24 @@
             "program": "${workspaceFolder}\\manage.py"
         },
         {
-            "name": "Python Debugger: Django",
+            "name": "Python Debugger Goods: Django",
             "type": "debugpy",
             "request": "launch",
             "args": [
-                "test"
+                "test",
+                "goods",
+            ],
+            "django": true,
+            "autoStartBrowser": false,
+            "program": "${workspaceFolder}\\manage.py"
+        },
+        {
+            "name": "Python Debugger Users: Django",
+            "type": "debugpy",
+            "request": "launch",
+            "args": [
+                "test",
+                "users",
             ],
             "django": true,
             "autoStartBrowser": false,
