@@ -183,144 +183,144 @@
   "model": "auth.permission",
   "pk": 21,
   "fields": {
-    "name": "Can add Авто товары",
+    "name": "Can add Категории",
     "content_type": 6,
-    "codename": "add_goods"
+    "codename": "add_category"
   }
 },
 {
   "model": "auth.permission",
   "pk": 22,
   "fields": {
-    "name": "Can change Авто товары",
+    "name": "Can change Категории",
     "content_type": 6,
-    "codename": "change_goods"
+    "codename": "change_category"
   }
 },
 {
   "model": "auth.permission",
   "pk": 23,
   "fields": {
-    "name": "Can delete Авто товары",
+    "name": "Can delete Категории",
     "content_type": 6,
-    "codename": "delete_goods"
+    "codename": "delete_category"
   }
 },
 {
   "model": "auth.permission",
   "pk": 24,
   "fields": {
-    "name": "Can view Авто товары",
+    "name": "Can view Категории",
     "content_type": 6,
-    "codename": "view_goods"
+    "codename": "view_category"
   }
 },
 {
   "model": "auth.permission",
   "pk": 25,
   "fields": {
-    "name": "Can add Категории",
+    "name": "Can add tags",
     "content_type": 7,
-    "codename": "add_category"
+    "codename": "add_tags"
   }
 },
 {
   "model": "auth.permission",
   "pk": 26,
   "fields": {
-    "name": "Can change Категории",
+    "name": "Can change tags",
     "content_type": 7,
-    "codename": "change_category"
+    "codename": "change_tags"
   }
 },
 {
   "model": "auth.permission",
   "pk": 27,
   "fields": {
-    "name": "Can delete Категории",
+    "name": "Can delete tags",
     "content_type": 7,
-    "codename": "delete_category"
+    "codename": "delete_tags"
   }
 },
 {
   "model": "auth.permission",
   "pk": 28,
   "fields": {
-    "name": "Can view Категории",
+    "name": "Can view tags",
     "content_type": 7,
-    "codename": "view_category"
+    "codename": "view_tags"
   }
 },
 {
   "model": "auth.permission",
   "pk": 29,
   "fields": {
-    "name": "Can add tags",
+    "name": "Can add upload files",
     "content_type": 8,
-    "codename": "add_tags"
+    "codename": "add_uploadfiles"
   }
 },
 {
   "model": "auth.permission",
   "pk": 30,
   "fields": {
-    "name": "Can change tags",
+    "name": "Can change upload files",
     "content_type": 8,
-    "codename": "change_tags"
+    "codename": "change_uploadfiles"
   }
 },
 {
   "model": "auth.permission",
   "pk": 31,
   "fields": {
-    "name": "Can delete tags",
+    "name": "Can delete upload files",
     "content_type": 8,
-    "codename": "delete_tags"
+    "codename": "delete_uploadfiles"
   }
 },
 {
   "model": "auth.permission",
   "pk": 32,
   "fields": {
-    "name": "Can view tags",
+    "name": "Can view upload files",
     "content_type": 8,
-    "codename": "view_tags"
+    "codename": "view_uploadfiles"
   }
 },
 {
   "model": "auth.permission",
   "pk": 33,
   "fields": {
-    "name": "Can add upload files",
+    "name": "Can add Авто товары",
     "content_type": 9,
-    "codename": "add_uploadfiles"
+    "codename": "add_goods"
   }
 },
 {
   "model": "auth.permission",
   "pk": 34,
   "fields": {
-    "name": "Can change upload files",
+    "name": "Can change Авто товары",
     "content_type": 9,
-    "codename": "change_uploadfiles"
+    "codename": "change_goods"
   }
 },
 {
   "model": "auth.permission",
   "pk": 35,
   "fields": {
-    "name": "Can delete upload files",
+    "name": "Can delete Авто товары",
     "content_type": 9,
-    "codename": "delete_uploadfiles"
+    "codename": "delete_goods"
   }
 },
 {
   "model": "auth.permission",
   "pk": 36,
   "fields": {
-    "name": "Can view upload files",
+    "name": "Can view Авто товары",
     "content_type": 9,
-    "codename": "view_uploadfiles"
+    "codename": "view_goods"
   }
 },
 {
@@ -720,6 +720,42 @@
   }
 },
 {
+  "model": "auth.permission",
+  "pk": 81,
+  "fields": {
+    "name": "Can add captcha store",
+    "content_type": 21,
+    "codename": "add_captchastore"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 82,
+  "fields": {
+    "name": "Can change captcha store",
+    "content_type": 21,
+    "codename": "change_captchastore"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 83,
+  "fields": {
+    "name": "Can delete captcha store",
+    "content_type": 21,
+    "codename": "delete_captchastore"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 84,
+  "fields": {
+    "name": "Can view captcha store",
+    "content_type": 21,
+    "codename": "view_captchastore"
+  }
+},
+{
   "model": "contenttypes.contenttype",
   "pk": 1,
   "fields": {
@@ -759,10 +795,9 @@
     "model": "session"
   }
 },
-
 {
   "model": "contenttypes.contenttype",
-  "pk": 7,
+  "pk": 6,
   "fields": {
     "app_label": "goods",
     "model": "category"
@@ -770,7 +805,7 @@
 },
 {
   "model": "contenttypes.contenttype",
-  "pk": 8,
+  "pk": 7,
   "fields": {
     "app_label": "goods",
     "model": "tags"
@@ -778,10 +813,18 @@
 },
 {
   "model": "contenttypes.contenttype",
-  "pk": 9,
+  "pk": 8,
   "fields": {
     "app_label": "goods",
     "model": "uploadfiles"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 9,
+  "fields": {
+    "app_label": "goods",
+    "model": "goods"
   }
 },
 {
@@ -873,63 +916,35 @@
   }
 },
 {
-  "model": "sessions.session",
-  "pk": "9nuz43b3c6dnziycvo1busaln13rndsk",
+  "model": "contenttypes.contenttype",
+  "pk": 21,
   "fields": {
-    "session_data": ".eJytzU0LgjAYAOD_8p5FVObmvPUd5iEhDxYha05ZfkycRiX-94T-gufn8IygFZesYpyroelT3bNeaPBH-Bafdb6Jo-QcPnWYI_BvI7Sd4kLPDpUqZAMGZKxn4DdDVRnQllykXGUifYlO5lJ0f5kMmyALWRQR28SW49re3YAtfcd18NhHn_hwDKJkicDFyKTUwgTNQXuRjVefyuz6eOXubrVEgOcAOZRg4t2n6QdyyGgh:1tma3c:1vbMSdKxJWhUxLmy4KOeg3iyum00U9M2Gxk8rqRc7SY",
-    "expire_date": "2025-03-10T15:07:44.440Z"
+    "app_label": "captcha",
+    "model": "captchastore"
   }
 },
 {
   "model": "sessions.session",
-  "pk": "s4brhydewdwulctn2vmdsapa6g8fji5y",
+  "pk": "7mg893lh9yvx25rmdqexvo5jz4k41now",
   "fields": {
-    "session_data": ".eJyt0ttu2kAUBdB_mWdkzZn78JYagjElLaRFCVWEfMUWxuP4AliIf-9E-YV5O9J-WDra-446k5RRFSWJGer-0PVRn3VoekdrHw-jLoK8fUlmZPWJpv_uqGlNknU2R5U5ljWaoDTqIzSth6qaoOaUZIfEpNnhkrVlXmbtd_KYgGSYMiwV9hglmAn5MUGrzD9GYhu-FSY-LRvlQlCMegRAKWBWSJqbxvJcbE_sR6n56EAATKTHqQRrWaGk530A-UKYtifR2x8XAlDtgRSghLDCdrd4f-r8fTujTXQJdi4EIrAnuAbCv4Txc1M833B6M5vNbB266AEY4Z6ywHcP8qc-zkNdybGu3jfB3omgtcc5aAbaCnSHL-qay6dlEYcVqV0IAtseOFBFLRDP-eJvkgNfmd-xee2dAETZsUrBvpZ08VP_6i_LeHaL5Zk2LgAJ9gPAVAuwwvzXeRgDtp77z-Hwkl5dCEpRzx4A_OPx-A-ryV_2:1tmIQN:iG1JjDXoga4QKekaE_S7sgjBeywcABLLYgAVCpTl1sQ",
-    "expire_date": "2025-03-09T20:18:03.410Z"
-  }
-},
-{
-  "model": "sessions.session",
-  "pk": "surjmtxmob7lixqzvscgop8vmpgk1x08",
-  "fields": {
-    "session_data": ".eJxVjEEOwiAQRe_C2hAGCgWX7j0DmWFAqoYmpV0Z765NutDtf-_9l4i4rTVuPS9xYnEWIE6_G2F65LYDvmO7zTLNbV0mkrsiD9rldeb8vBzu30HFXr-1Ry6EI1gCDs4Ea4POPjhmnYzigZ0iReBdVpjZI4xGo0kDlQKFIYj3B-8nOFs:1tkpuX:rmJlwi6uMFvXU3LfZZK6FzA1hBIaizkVTvbSVIoQWeU",
-    "expire_date": "2025-03-05T19:39:09.262Z"
+    "session_data": ".eJxVjMEOwiAQRP-FsyELdAt49N5vIAtspGogKe3J-O-2SQ96m8x7M28RaFtL2DovYc7iKpS4_HaR0pPrAfKD6r3J1Oq6zFEeijxpl1PL_Lqd7t9BoV72tVcugsYENgN5AnLKIINnPSgymZ1DTqOhUXllPSOhhT1bNFoPGLX4fAG_dzZ5:1treRm:aZZcXvOjNPdPgAvwynLYA_EenTdPnISYzrUUyXuo32c",
+    "expire_date": "2025-03-24T14:49:38.389Z"
   }
 },
 {
   "model": "users.user",
   "pk": 1,
   "fields": {
-    "password": "pbkdf2_sha256$870000$fl7QGtfcChJ9mpbdZsZLUV$O1Nr/DVuCBDWlki+uBZ7Iy0+c0prLYGHigwddTCyexk=",
-    "last_login": "2025-02-20T13:48:52.414Z",
+    "password": "pbkdf2_sha256$870000$WhzS71GePSG9Zw58iEDzpb$zuZnGBS90yLNG18kBt9JJ3deOswKXK3FETL3UFdZtDc=",
+    "last_login": "2025-03-10T14:49:38.367Z",
     "is_superuser": true,
     "username": "root",
-    "first_name": "Араб",
+    "first_name": "",
     "last_name": "",
-    "email": "root@gmail.com",
+    "email": "",
     "is_staff": true,
     "is_active": true,
-    "date_joined": "2025-02-19T14:24:19.336Z",
-    "photo": "users/2025/02/19/усмехаясь-араб-41313681.png",
-    "date_birth": "1925-07-17T00:00:00Z",
-    "groups": [],
-    "user_permissions": []
-  }
-},
-{
-  "model": "users.user",
-  "pk": 2,
-  "fields": {
-    "password": "pbkdf2_sha256$870000$3u7nZZ3F7t9UD1dOVqPjbP$CXawOE++NXw6vIv1mztVV2P1FRMIKgiNeieJ/rGLVAQ=",
-    "last_login": "2025-02-20T13:50:10.274Z",
-    "is_superuser": false,
-    "username": "admin",
-    "first_name": "Алан",
-    "last_name": "Цолоев",
-    "email": "tsoloevalan@gmail.com",
-    "is_staff": false,
-    "is_active": true,
-    "date_joined": "2025-02-20T13:48:09.057Z",
+    "date_joined": "2025-03-10T14:49:14.513Z",
     "photo": "",
     "date_birth": null,
     "groups": [],
