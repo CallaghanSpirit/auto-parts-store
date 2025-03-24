@@ -6,8 +6,6 @@ backcall==0.2.0
 beautifulsoup4==4.13.3
 bleach==6.2.0
 build==1.2.2.post1
-certifi==2025.1.31
-cffi==1.17.1
 charset-normalizer==3.4.1
 click==8.1.8
 colorama==0.4.6
@@ -50,8 +48,6 @@ pip-tools==7.4.1
 pipreqs==0.5.0
 platformdirs==4.3.6
 prompt_toolkit==3.0.48
-psycopg==3.2.5
-psycopg-binary==3.2.5
 pure_eval==0.2.3
 pycparser==2.22
 Pygments==2.18.0
