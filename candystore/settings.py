@@ -97,6 +97,8 @@ SOCIALACCOUNT_PROVIDERS = {
     }
 }
 
+
+
 NEXTAUTH_URL= "http://localhost:3000"
 
 ROOT_URLCONF = 'candystore.urls'
